@@ -1,0 +1,58 @@
+﻿@model Inventory.Models.Tbl_Object
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Tbl_Object</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Ob_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ob_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ob_Purchase_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ob_Purchase_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ob_Est_Value)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ob_Est_Value)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ob_Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ob_Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tbl_Category.Ca_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tbl_Category.Ca_Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Ob_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
