@@ -20,13 +20,17 @@
                 @Html.ActionLink("PersonligaPrylar", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
+                @using Microsoft.AspNet.Identity
+                @if (Request.IsAuthenticated)
+                {
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Inventory list", "Index", "Object")</li>
+                        <li>@Html.ActionLink("Locations", "Index", "Location")</li>
+                        <li>@Html.ActionLink("Categories", "Index", "Category")</li>
+                    </ul>
+                }
+                    @Html.Partial("_LoginPartial")
+                </div>
         </div>
     </div>
     <div class="container body-content">

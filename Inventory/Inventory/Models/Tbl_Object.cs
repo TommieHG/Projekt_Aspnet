@@ -11,7 +11,9 @@ namespace Inventory.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Tbl_Object
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,11 +24,16 @@ namespace Inventory.Models
     
         public int Ob_ID { get; set; }
         public int FK_Ca_ID { get; set; }
+        [DisplayName("Name")]
         public string Ob_Name { get; set; }
+        [DisplayName("Purchase Date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         public Nullable<System.DateTime> Ob_Purchase_Date { get; set; }
+        [DisplayName("Estimated Value")]
         public Nullable<double> Ob_Est_Value { get; set; }
+        [DisplayName("Description")]
         public string Ob_Description { get; set; }
-    
+        [DisplayName("Category")]
         public virtual Tbl_Category Tbl_Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tbl_Object_Location> Tbl_Object_Location { get; set; }

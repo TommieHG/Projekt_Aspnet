@@ -1,0 +1,26 @@
+﻿@model Inventory.Models.Tbl_Location
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Tbl_Location</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Lo_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lo_Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Lo_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
