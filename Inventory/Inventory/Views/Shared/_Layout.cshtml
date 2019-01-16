@@ -20,8 +20,8 @@
                 @Html.ActionLink("PersonligaPrylar", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                @using Microsoft.AspNet.Identity
-                @if (Request.IsAuthenticated)
+
+                @if (ViewContext.HttpContext.User.IsInRole("Admin"))
                 {
                     <ul class="nav navbar-nav">
                         <li>@Html.ActionLink("Inventory list", "Index", "Object")</li>
@@ -29,7 +29,13 @@
                         <li>@Html.ActionLink("Categories", "Index", "Category")</li>
                     </ul>
                 }
-                    @Html.Partial("_LoginPartial")
+                else if (ViewContext.HttpContext.User.IsInRole("Viewer"))
+                {
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Inventory list", "Index", "Object")</li>
+                    </ul>
+                }
+                        @Html.Partial("_LoginPartial")
                 </div>
         </div>
     </div>
@@ -37,7 +43,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Tommies Hemsideskjul KB: hemsidor för dig med låg högstanivå</p>
         </footer>
     </div>
 

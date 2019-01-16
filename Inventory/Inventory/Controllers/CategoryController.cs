@@ -10,6 +10,7 @@ using Inventory.Models;
 
 namespace Inventory.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CategoryController : Controller
     {
         private InventoryEntities db = new InventoryEntities();

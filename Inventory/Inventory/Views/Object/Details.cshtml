@@ -39,20 +39,21 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Ob_Description)
+            @Html.DisplayFor(model => model.Ob_Quantity)
         </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tbl_Location.Lo_Name)
+        </dt>
 
         <dt>
             @Html.DisplayNameFor(model => model.Tbl_Category.Ca_Name)
         </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Tbl_Category.Ca_Name)
-        </dd>
-
     </dl>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Ob_ID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Ob_ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+

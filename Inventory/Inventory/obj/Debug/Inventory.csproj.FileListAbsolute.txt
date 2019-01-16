@@ -118,3 +118,5 @@ C:\Users\Tommie\Documents\Kod\MVC\Projekt\Inventory\Inventory\obj\Debug\Inventor
 C:\Users\Tommie\Documents\Kod\MVC\Projekt\Inventory\Inventory\obj\Debug\Inventory.dll
 C:\Users\Tommie\Documents\Kod\MVC\Projekt\Inventory\Inventory\obj\Debug\Inventory.pdb
 C:\Users\Tommie\Documents\Kod\MVC\Projekt\Inventory\Inventory\obj\Debug\Inventory.csprojAssemblyReference.cache
+C:\Users\Tommie\Documents\Kod\MVC\Projekt\Inventory\Inventory\bin\itextsharp.dll
+C:\Users\Tommie\Documents\Kod\MVC\Projekt\Inventory\Inventory\bin\Rotativa.dll

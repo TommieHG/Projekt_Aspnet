@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Tbl_Category">
           <Key>
             <PropertyRef Name="Ca_ID" />
@@ -29,15 +29,8 @@
           <Property Name="Ob_Purchase_Date" Type="date" />
           <Property Name="Ob_Est_Value" Type="float" />
           <Property Name="Ob_Description" Type="nvarchar" MaxLength="280" />
-        </EntityType>
-        <EntityType Name="Tbl_Object_Location">
-          <Key>
-            <PropertyRef Name="Ob_ID" />
-            <PropertyRef Name="Lo_ID" />
-          </Key>
-          <Property Name="Ob_ID" Type="int" Nullable="false" />
-          <Property Name="Lo_ID" Type="int" Nullable="false" />
-          <Property Name="Qty" Type="int" Nullable="false" />
+          <Property Name="Ob_Quantity" Type="int" Nullable="false" />
+          <Property Name="FK_Lo_ID" Type="int" />
         </EntityType>
         <Association Name="FK__Tbl_Objec__FK_Ca__3A81B327">
           <End Role="Tbl_Category" Type="Self.Tbl_Category" Multiplicity="1" />
@@ -51,27 +44,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Tbl_Objec__Lo_ID__3E52440B">
-          <End Role="Tbl_Location" Type="Self.Tbl_Location" Multiplicity="1" />
-          <End Role="Tbl_Object_Location" Type="Self.Tbl_Object_Location" Multiplicity="*" />
+        <Association Name="FK__Tbl_Objec__FK_Lo__73BA3083">
+          <End Role="Tbl_Location" Type="Self.Tbl_Location" Multiplicity="0..1" />
+          <End Role="Tbl_Object" Type="Self.Tbl_Object" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tbl_Location">
               <PropertyRef Name="Lo_ID" />
             </Principal>
-            <Dependent Role="Tbl_Object_Location">
-              <PropertyRef Name="Lo_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Tbl_Objec__Ob_ID__3D5E1FD2">
-          <End Role="Tbl_Object" Type="Self.Tbl_Object" Multiplicity="1" />
-          <End Role="Tbl_Object_Location" Type="Self.Tbl_Object_Location" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tbl_Object">
-              <PropertyRef Name="Ob_ID" />
-            </Principal>
-            <Dependent Role="Tbl_Object_Location">
-              <PropertyRef Name="Ob_ID" />
+            <Dependent Role="Tbl_Object">
+              <PropertyRef Name="FK_Lo_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -79,22 +60,16 @@
           <EntitySet Name="Tbl_Category" EntityType="Self.Tbl_Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Location" EntityType="Self.Tbl_Location" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Object" EntityType="Self.Tbl_Object" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Tbl_Object_Location" EntityType="Self.Tbl_Object_Location" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Tbl_Objec__FK_Ca__3A81B327" Association="Self.FK__Tbl_Objec__FK_Ca__3A81B327">
             <End Role="Tbl_Category" EntitySet="Tbl_Category" />
             <End Role="Tbl_Object" EntitySet="Tbl_Object" />
           </AssociationSet>
-          <AssociationSet Name="FK__Tbl_Objec__Lo_ID__3E52440B" Association="Self.FK__Tbl_Objec__Lo_ID__3E52440B">
+          <AssociationSet Name="FK__Tbl_Objec__FK_Lo__73BA3083" Association="Self.FK__Tbl_Objec__FK_Lo__73BA3083">
             <End Role="Tbl_Location" EntitySet="Tbl_Location" />
-            <End Role="Tbl_Object_Location" EntitySet="Tbl_Object_Location" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Tbl_Objec__Ob_ID__3D5E1FD2" Association="Self.FK__Tbl_Objec__Ob_ID__3D5E1FD2">
             <End Role="Tbl_Object" EntitySet="Tbl_Object" />
-            <End Role="Tbl_Object_Location" EntitySet="Tbl_Object_Location" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -112,7 +87,7 @@
           </Key>
           <Property Name="Lo_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Lo_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Tbl_Object_Location" Relationship="Self.FK__Tbl_Objec__Lo_ID__3E52440B" FromRole="Tbl_Location" ToRole="Tbl_Object_Location" />
+          <NavigationProperty Name="Tbl_Object" Relationship="Model.FK__Tbl_Objec__FK_Lo__73BA3083" FromRole="Tbl_Location" ToRole="Tbl_Object" />
         </EntityType>
         <EntityType Name="Tbl_Object">
           <Key>
@@ -125,18 +100,9 @@
           <Property Name="Ob_Est_Value" Type="Double" />
           <Property Name="Ob_Description" Type="String" MaxLength="280" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Tbl_Category" Relationship="Self.FK__Tbl_Objec__FK_Ca__3A81B327" FromRole="Tbl_Object" ToRole="Tbl_Category" />
-          <NavigationProperty Name="Tbl_Object_Location" Relationship="Self.FK__Tbl_Objec__Ob_ID__3D5E1FD2" FromRole="Tbl_Object" ToRole="Tbl_Object_Location" />
-        </EntityType>
-        <EntityType Name="Tbl_Object_Location">
-          <Key>
-            <PropertyRef Name="Ob_ID" />
-            <PropertyRef Name="Lo_ID" />
-          </Key>
-          <Property Name="Ob_ID" Type="Int32" Nullable="false" />
-          <Property Name="Lo_ID" Type="Int32" Nullable="false" />
-          <Property Name="Qty" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Tbl_Location" Relationship="Self.FK__Tbl_Objec__Lo_ID__3E52440B" FromRole="Tbl_Object_Location" ToRole="Tbl_Location" />
-          <NavigationProperty Name="Tbl_Object" Relationship="Self.FK__Tbl_Objec__Ob_ID__3D5E1FD2" FromRole="Tbl_Object_Location" ToRole="Tbl_Object" />
+          <Property Name="Ob_Quantity" Type="Int32" Nullable="false" />
+          <Property Name="FK_Lo_ID" Type="Int32" />
+          <NavigationProperty Name="Tbl_Location" Relationship="Model.FK__Tbl_Objec__FK_Lo__73BA3083" FromRole="Tbl_Object" ToRole="Tbl_Location" />
         </EntityType>
         <Association Name="FK__Tbl_Objec__FK_Ca__3A81B327">
           <End Role="Tbl_Category" Type="Self.Tbl_Category" Multiplicity="1" />
@@ -150,48 +116,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Tbl_Objec__Lo_ID__3E52440B">
-          <End Role="Tbl_Location" Type="Self.Tbl_Location" Multiplicity="1" />
-          <End Role="Tbl_Object_Location" Type="Self.Tbl_Object_Location" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tbl_Location">
-              <PropertyRef Name="Lo_ID" />
-            </Principal>
-            <Dependent Role="Tbl_Object_Location">
-              <PropertyRef Name="Lo_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Tbl_Objec__Ob_ID__3D5E1FD2">
-          <End Role="Tbl_Object" Type="Self.Tbl_Object" Multiplicity="1" />
-          <End Role="Tbl_Object_Location" Type="Self.Tbl_Object_Location" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tbl_Object">
-              <PropertyRef Name="Ob_ID" />
-            </Principal>
-            <Dependent Role="Tbl_Object_Location">
-              <PropertyRef Name="Ob_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="InventoryEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Tbl_Category" EntityType="Self.Tbl_Category" />
           <EntitySet Name="Tbl_Location" EntityType="Self.Tbl_Location" />
           <EntitySet Name="Tbl_Object" EntityType="Self.Tbl_Object" />
-          <EntitySet Name="Tbl_Object_Location" EntityType="Self.Tbl_Object_Location" />
           <AssociationSet Name="FK__Tbl_Objec__FK_Ca__3A81B327" Association="Self.FK__Tbl_Objec__FK_Ca__3A81B327">
             <End Role="Tbl_Category" EntitySet="Tbl_Category" />
             <End Role="Tbl_Object" EntitySet="Tbl_Object" />
           </AssociationSet>
-          <AssociationSet Name="FK__Tbl_Objec__Lo_ID__3E52440B" Association="Self.FK__Tbl_Objec__Lo_ID__3E52440B">
+          <AssociationSet Name="FK__Tbl_Objec__FK_Lo__73BA3083" Association="Model.FK__Tbl_Objec__FK_Lo__73BA3083">
             <End Role="Tbl_Location" EntitySet="Tbl_Location" />
-            <End Role="Tbl_Object_Location" EntitySet="Tbl_Object_Location" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Tbl_Objec__Ob_ID__3D5E1FD2" Association="Self.FK__Tbl_Objec__Ob_ID__3D5E1FD2">
             <End Role="Tbl_Object" EntitySet="Tbl_Object" />
-            <End Role="Tbl_Object_Location" EntitySet="Tbl_Object_Location" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
+        <Association Name="FK__Tbl_Objec__FK_Lo__73BA3083">
+          <End Type="Model.Tbl_Location" Role="Tbl_Location" Multiplicity="0..1" />
+          <End Type="Model.Tbl_Object" Role="Tbl_Object" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Location">
+              <PropertyRef Name="Lo_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Object">
+              <PropertyRef Name="FK_Lo_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -217,21 +166,14 @@
           <EntitySetMapping Name="Tbl_Object">
             <EntityTypeMapping TypeName="Model.Tbl_Object">
               <MappingFragment StoreEntitySet="Tbl_Object">
+                <ScalarProperty Name="FK_Lo_ID" ColumnName="FK_Lo_ID" />
+                <ScalarProperty Name="Ob_Quantity" ColumnName="Ob_Quantity" />
                 <ScalarProperty Name="Ob_ID" ColumnName="Ob_ID" />
                 <ScalarProperty Name="FK_Ca_ID" ColumnName="FK_Ca_ID" />
                 <ScalarProperty Name="Ob_Name" ColumnName="Ob_Name" />
                 <ScalarProperty Name="Ob_Purchase_Date" ColumnName="Ob_Purchase_Date" />
                 <ScalarProperty Name="Ob_Est_Value" ColumnName="Ob_Est_Value" />
                 <ScalarProperty Name="Ob_Description" ColumnName="Ob_Description" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Tbl_Object_Location">
-            <EntityTypeMapping TypeName="Model.Tbl_Object_Location">
-              <MappingFragment StoreEntitySet="Tbl_Object_Location">
-                <ScalarProperty Name="Ob_ID" ColumnName="Ob_ID" />
-                <ScalarProperty Name="Lo_ID" ColumnName="Lo_ID" />
-                <ScalarProperty Name="Qty" ColumnName="Qty" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

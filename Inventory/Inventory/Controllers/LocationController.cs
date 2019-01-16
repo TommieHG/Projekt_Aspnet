@@ -10,6 +10,7 @@ using Inventory.Models;
 
 namespace Inventory.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class LocationController : Controller
     {
         private InventoryEntities db = new InventoryEntities();

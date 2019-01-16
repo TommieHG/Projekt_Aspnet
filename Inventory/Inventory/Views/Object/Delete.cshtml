@@ -40,8 +40,12 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Ob_Description)
+            @Html.DisplayFor(model => model.Ob_Quantity)
         </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tbl_Location.Lo_Name)
+        </dt>
 
         <dt>
             @Html.DisplayNameFor(model => model.Tbl_Category.Ca_Name)
@@ -50,7 +54,6 @@
         <dd>
             @Html.DisplayFor(model => model.Tbl_Category.Ca_Name)
         </dd>
-
     </dl>
 
     @using (Html.BeginForm()) {

@@ -16,13 +16,8 @@ namespace Inventory.Models
 
     public partial class Tbl_Object
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Tbl_Object()
-        {
-            this.Tbl_Object_Location = new HashSet<Tbl_Object_Location>();
-        }
-    
         public int Ob_ID { get; set; }
+        [DisplayName("Category")]
         public int FK_Ca_ID { get; set; }
         [DisplayName("Name")]
         public string Ob_Name { get; set; }
@@ -33,9 +28,12 @@ namespace Inventory.Models
         public Nullable<double> Ob_Est_Value { get; set; }
         [DisplayName("Description")]
         public string Ob_Description { get; set; }
-        [DisplayName("Category")]
+        [DisplayName("Quantity")]
+        public int Ob_Quantity { get; set; }
+        [DisplayName("Location")]
+        public Nullable<int> FK_Lo_ID { get; set; }
+    
         public virtual Tbl_Category Tbl_Category { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tbl_Object_Location> Tbl_Object_Location { get; set; }
+        public virtual Tbl_Location Tbl_Location { get; set; }
     }
 }

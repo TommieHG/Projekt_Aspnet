@@ -4,11 +4,15 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Stuff in your house</h2>
+@if (ViewContext.HttpContext.User.IsInRole("Admin"))
+{
+    <p>
+        @Html.ActionLink("Add New Item", "Create")
+    </p>
+}
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<p>Total value: @ViewBag.Total</p>
 <table class="table">
     <tr>
         <th>
@@ -24,34 +28,61 @@
             @Html.DisplayNameFor(model => model.Ob_Description)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Tbl_Category.Ca_Name)
+            @Html.DisplayNameFor(model => model.Ob_Quantity)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tbl_Category.Ca_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tbl_Location.Lo_ID)
+        </th>
+
+
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ob_Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ob_Purchase_Date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ob_Est_Value)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ob_Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Tbl_Category.Ca_Name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Ob_ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Ob_ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Ob_ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ob_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ob_Purchase_Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ob_Est_Value)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ob_Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ob_Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tbl_Category.Ca_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tbl_Location.Lo_Name)
+            </td>
+
+            @if (ViewContext.HttpContext.User.IsInRole("Admin"))
+            {
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Ob_ID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Ob_ID })|
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Ob_ID })
+                </td>
+            }
+            else if (ViewContext.HttpContext.User.IsInRole("Viewer"))
+            {
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.Ob_ID })
+                </td>
+
+            }
+        </tr>
+    }
 
 </table>
+@Html.ActionLink("Generate a .pdf", "GeneratePDF")

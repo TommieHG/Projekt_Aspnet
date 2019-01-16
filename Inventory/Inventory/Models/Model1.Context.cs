@@ -28,6 +28,5 @@ namespace Inventory.Models
         public virtual DbSet<Tbl_Category> Tbl_Category { get; set; }
         public virtual DbSet<Tbl_Location> Tbl_Location { get; set; }
         public virtual DbSet<Tbl_Object> Tbl_Object { get; set; }
-        public virtual DbSet<Tbl_Object_Location> Tbl_Object_Location { get; set; }
     }
 }

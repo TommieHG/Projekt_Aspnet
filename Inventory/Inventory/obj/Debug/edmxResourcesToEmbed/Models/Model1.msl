@@ -20,21 +20,14 @@
     <EntitySetMapping Name="Tbl_Object">
       <EntityTypeMapping TypeName="Model.Tbl_Object">
         <MappingFragment StoreEntitySet="Tbl_Object">
+          <ScalarProperty Name="FK_Lo_ID" ColumnName="FK_Lo_ID" />
+          <ScalarProperty Name="Ob_Quantity" ColumnName="Ob_Quantity" />
           <ScalarProperty Name="Ob_ID" ColumnName="Ob_ID" />
           <ScalarProperty Name="FK_Ca_ID" ColumnName="FK_Ca_ID" />
           <ScalarProperty Name="Ob_Name" ColumnName="Ob_Name" />
           <ScalarProperty Name="Ob_Purchase_Date" ColumnName="Ob_Purchase_Date" />
           <ScalarProperty Name="Ob_Est_Value" ColumnName="Ob_Est_Value" />
           <ScalarProperty Name="Ob_Description" ColumnName="Ob_Description" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Tbl_Object_Location">
-      <EntityTypeMapping TypeName="Model.Tbl_Object_Location">
-        <MappingFragment StoreEntitySet="Tbl_Object_Location">
-          <ScalarProperty Name="Ob_ID" ColumnName="Ob_ID" />
-          <ScalarProperty Name="Lo_ID" ColumnName="Lo_ID" />
-          <ScalarProperty Name="Qty" ColumnName="Qty" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

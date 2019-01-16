@@ -20,7 +20,8 @@ namespace Inventory.Models
         {
             this.Tbl_Object = new HashSet<Tbl_Object>();
         }
-    
+
+        [DisplayName("Category")]
         public int Ca_ID { get; set; }
         [DisplayName("Category")]
         public string Ca_Name { get; set; }

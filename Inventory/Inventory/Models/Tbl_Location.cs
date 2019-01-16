@@ -18,14 +18,15 @@ namespace Inventory.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Tbl_Location()
         {
-            this.Tbl_Object_Location = new HashSet<Tbl_Object_Location>();
+            this.Tbl_Object = new HashSet<Tbl_Object>();
         }
-    
+
+        [DisplayName("Location")]
         public int Lo_ID { get; set; }
-        [DisplayName("Name")]
+        [DisplayName("Location")]
         public string Lo_Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tbl_Object_Location> Tbl_Object_Location { get; set; }
+        public virtual ICollection<Tbl_Object> Tbl_Object { get; set; }
     }
 }
