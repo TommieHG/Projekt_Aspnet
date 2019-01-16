@@ -13,6 +13,15 @@
 }
 
 <p>Total value: @ViewBag.Total</p>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Filter by location: @Html.DropDownList("filterLocation", new SelectList(ViewBag.filter), "")
+        <input type="submit" value="Filter" />
+    </p>
+}
+
 <table class="table">
     <tr>
         <th>

@@ -19,12 +19,19 @@ namespace Inventory.Controllers
 
         //GET: Object
         [Authorize(Roles = "Admin, Viewer")]
-        public ActionResult Index()
+        public ActionResult Index(string filterLocation)
         {
-            
-            var tbl_Object = db.Tbl_Object.Include(t => t.Tbl_Category);
-            ViewBag.Total = tbl_Object.Sum(x => x.Ob_Est_Value);
-            return View(tbl_Object.ToList());
+            ViewBag.Total = (from s in db.Tbl_Object select s.Ob_Est_Value).Sum();
+
+            ViewBag.filter = (from s in db.Tbl_Location select s.Lo_Name).Distinct();
+
+            var filter = from r in db.Tbl_Object
+                         orderby r.Ob_Name
+                         where r.Tbl_Location.Lo_Name == filterLocation || filterLocation == null || filterLocation == ""
+                         select r;
+
+            return View(filter.ToList());
+
         }
 
         // GET: Object/Details/5
